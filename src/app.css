@@ -1,0 +1,61 @@
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 0.1rem;
+}
+
+li span:first-child {
+  font-weight: bold;
+  color: #007bff;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+.answer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.answer-box {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.segment:last-child {
+  border-bottom: none;
+}
+
+.segment-confidence {
+  font-weight: bold;
+  color: #007bff;
+}
