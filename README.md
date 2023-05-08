@@ -11,12 +11,11 @@ AskUI is a React TypeScript application that allows users to ask questions and g
 
 1. Clone the repository:
 
-git clone https://github.com/oreninho/askUi.git
-Change to the project directory:
-
-cd AskUI
-Install the dependencies:
-npm install
+2. git clone https://github.com/oreninho/askUi.git
+3. Change to the project directory:
+4. cd "YOUR_DIR"
+5. Install the dependencies:
+5. npm install
 
 ## Running the Application
 To start the development server:
