@@ -21,6 +21,7 @@ export class AskAiApi implements IAskAiApi {
 
     private tokenTimestamp: number = 0;
     private token: string = '';
+    private minutesToRefreshToken: number = 2;
 
     private possibleApiKeysForInference: string[] = [
         '7c4e87e6-aef8-467a-b43a-4f80147453bf',
@@ -43,7 +44,8 @@ export class AskAiApi implements IAskAiApi {
     private async refreshToken() {
         let response = {token:''};
         try{
-            connection.init(this.possibleApiKeysForChunk[0]);
+            let randomIndex = Math.floor(Math.random() * this.possibleApiKeysForChunk.length);
+            connection.init(this.possibleApiKeysForChunk[randomIndex]);
             response = await connection.post<ITokenResponse>("https://chunk-holder.hw.ask-ai.co/auth/generate-token",{});
         }
         catch(e){
@@ -53,8 +55,9 @@ export class AskAiApi implements IAskAiApi {
         this.token =  response.token;
     }
 
+ 
     public async getToken(): Promise<string> {
-        if (this.tokenTimestamp == 0 || this.tokenTimestamp + 60000 < Date.now()) {
+        if (this.tokenTimestamp == 0 || this.tokenTimestamp + 60000*this.minutesToRefreshToken < Date.now()) {
             this.setTokenTimestamp();
             await this.refreshToken();
         }
@@ -62,16 +65,18 @@ export class AskAiApi implements IAskAiApi {
     }
 
     public async getInference<T>(data:questionData): Promise<T> {
-        connection.init(this.possibleApiKeysForInference[1]);
+        let randomIndex = Math.floor(Math.random() * this.possibleApiKeysForInference.length);
+        connection.init(this.possibleApiKeysForInference[randomIndex]);
         const response = await connection.post<T>('https://inference-runner.hw.ask-ai.co/ask',data);
         return response;
     }
 
     public async getChunkByChunkId(chunkId: string,token:string): Promise<string> {
-        const response = await connection.get<string>('https://chunk-holder.hw.ask-ai.co/chunks/' + chunkId,{ headers:{'Authorization': token} });
+        const response = await connection.get<string>('https://chunk-holder.hw.ask-ai.co/chunks/' + chunkId, { headers:{'Authorization': token} });
         return response;
     }
 
 }
 const askAiApi = new AskAiApi();
+
 export default askAiApi;
