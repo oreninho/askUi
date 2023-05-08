@@ -19,9 +19,8 @@ AskUI is a React TypeScript application that allows users to ask questions and g
 
 ## Running the Application
 To start the development server:
-
-npm start
-This will open the application in your default web browser at http://localhost:3000.
+1.npm start
+2. This will open the application in your default web browser at http://localhost:3000.
 
 ## Usage:
 Enter your question in the text area provided.
